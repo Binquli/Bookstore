@@ -7,7 +7,7 @@
 <body>
 	<h1>Bookstore</h1>
 	<p>Below you can add a new book.</p>
-	<form action="#" th:action="@{/newbook}"  th:object= ${book} method="post">
+	<form action="#" th:action="@{/addbook}"  th:object= ${book} method="post">
 	<p>Title: <input type="text" th:field="${book.title}" /></p>
 	<p>Year: <input type="text" th:field="${book.year}" /></p>
 	<p>Author: <input type="text" th:field="${book.author}" /></p>
