@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -17,6 +19,10 @@ public class Book {
 	private int isbn;
 	private String price;
 	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
+
 	public Book() {
 		super();	
 		this.id = null;
@@ -26,15 +32,16 @@ public class Book {
 		this.isbn = 0;
 		this.year = 0;
 	}
-	public Book(String title, String author, String price, int year, int isbn) {
+	public Book(String title, String author, String price, int year, int isbn, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.price = price;
 		this.year = year;
 		this.isbn = isbn;
+		this.category = category;
 	}
-	public Book(Long id, String title, String author, String price, int year, int isbn) {
+	public Book(Long id, String title, String author, String price, int year, int isbn, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -42,6 +49,7 @@ public class Book {
 		this.price = price;
 		this.year = year;
 		this.isbn = isbn;
+		this.category = category;
 	}
 	public Long getId() {
 		return id;
@@ -79,6 +87,13 @@ public class Book {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn

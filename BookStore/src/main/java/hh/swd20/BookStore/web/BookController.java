@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import hh.swd20.BookStore.domain.Book;
 import hh.swd20.BookStore.domain.BookRepository;
+import hh.swd20.BookStore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 
 	@Autowired
-	BookRepository bookRepository; 
+	private BookRepository bookRepository; 
+	
+	@Autowired
+	private CategoryRepository crepository;
 	
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public String getBooks(Model model) {
@@ -28,6 +32,7 @@ public class BookController {
 	@RequestMapping(value = "/addbook", method = RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", crepository.findAll());
 		return "bookform";
 	}
 	
@@ -46,6 +51,7 @@ public class BookController {
 	@RequestMapping(value = "/editbook/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
+		model.addAttribute("categories", crepository.findAll());
 		return "editbook";
 	}
 	
