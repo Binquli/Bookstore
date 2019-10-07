@@ -10,9 +10,7 @@ import hh.swd20.BookStore.domain.User;
 import hh.swd20.BookStore.domain.UserRepository;
 
 
-/**
- * This class is used by spring security to authenticate and authorize user
- **/
+
 @Service
 public class UserDetailServiceImpl implements UserDetailsService  {
 	private final UserRepository repository;

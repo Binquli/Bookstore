@@ -26,8 +26,9 @@ public class BookStoreConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests().antMatchers("/css/**").permitAll()
 		.and()
-        .authorizeRequests()
-          .anyRequest().authenticated()
+		.authorizeRequests().antMatchers("/signup", "/saveuser").permitAll()
+		.and()
+        .authorizeRequests().anyRequest().authenticated()
           .and()
       .formLogin()
           .loginPage("/login")
