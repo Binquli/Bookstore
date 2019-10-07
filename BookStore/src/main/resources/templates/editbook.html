@@ -8,7 +8,7 @@
 	<h1>Bookstore</h1>
 	<p>Below you can edit the selected book.</p>	
 	<div>
-	<form th:object="${book}" th:action="@{/addbook}" action="#" method="post">
+	<form th:object="${book}" th:action="@{/save}" action="#" method="post">
 <input type="hidden" th:field="*{id}" class="form-control"/>
 	<p>Title: <input type="text" th:field="${book.title}" /></p>
 	<p>Year: <input type="text" th:field="${book.year}" /></p>

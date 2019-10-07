@@ -3,10 +3,22 @@
 <head>
 <title>Book List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
+
+<div class="col-md-4">
+	</div>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+	</div>
 	<h1>Books</h1>
-	<table>
+	<table >
 		<tr>
 			<th>Author</th>
 			<th>Title</th>
@@ -14,6 +26,7 @@
 			<th>ISBN</th>
 			<th>Year</th>
 			<th>Category</th>
+			<th sec:authorize="hasRole('ADMIN')"> </th>
 		</tr>
 
 		<tr th:each="book : ${books}">
@@ -24,10 +37,10 @@
 			<td th:text="${book.year}">Year</td>
 			<td th:text="${book.category.name}">Category</td>
 			
-			<td><a th:href="@{/deletebook/{id}(id=${book.id})}">Delete</a></td>
-			<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
 		</tr>
-	</table>
+	</table>	
 	<a href="/addbook">Add a new book</a>
 
 </body>
